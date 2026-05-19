@@ -1,13 +1,20 @@
 # Calculadora Profissional
+🧮 Calculadora Moderna
 
-Este é um projeto de calculadora feito com HTML, CSS e JavaScript.
-
-## 💻 Tecnologias usadas
-- HTML
-- CSS
-- JavaScript
+Calculadora web moderna feita com HTML, CSS e JavaScript.
 
 ## 🚀 Funcionalidades
-- Soma, subtração, multiplicação e divisão
-- Suporte ao teclado
-- Interface simples e responsiva
+
+- Cálculo em tempo real
+- Interface moderna estilo dark mode
+- Botão CE (apagar último caractere)
+- Botão C (limpar tudo)
+- Suporte a teclado
+- Resultado dinâmico enquanto digita
+
+## 🖥️ Tecnologias
+
+- HTML5
+- CSS3 (Grid + Flexbox)
+- JavaScript puro
+
