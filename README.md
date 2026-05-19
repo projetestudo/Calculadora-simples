@@ -1,7 +1,7 @@
 # Calculadora Profissional
 🧮 Calculadora Moderna
 
-Calculadora web moderna feita com HTML, CSS e JavaScript.
+Calculadora moderna feita com HTML, CSS e JavaScript.
 
 ## 🚀 Funcionalidades
 
