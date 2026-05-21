@@ -1,4 +1,4 @@
-# Calculadora Profissional
+# Calculadora Moderna
 🧮 Calculadora Moderna
 
 Calculadora moderna feita com HTML, CSS e JavaScript.
