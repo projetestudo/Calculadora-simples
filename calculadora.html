@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora Moderna</title>
+
+<style>
+*{
+  margin:0;
+    padding:0;
+      box-sizing:border-box;
+        font-family:Arial, sans-serif;
+        }
+
+        body{
+          height:100vh;
+            display:flex;
+              justify-content:center;
+                align-items:center;
+                  background: radial-gradient(circle at top, #1e293b, #0f172a);
+                  }
+
+                  /* CONTAINER */
+                  .calculadora{
+                    width:340px;
+                      background:#111827;
+                        border-radius:20px;
+                          padding:18px;
+                            box-shadow:0 20px 60px rgba(0,0,0,0.5);
+                            }
+
+                            /* DISPLAY */
+                            .display{
+                              background:#0b1220;
+                                border-radius:14px;
+                                  padding:16px;
+                                    margin-bottom:15px;
+                                      color:white;
+                                        text-align:right;
+                                          overflow:hidden;
+                                          }
+
+                                          .expr{
+                                            font-size:1.2rem;
+                                              opacity:0.7;
+                                                min-height:20px;
+                                                }
+
+                                                .result{
+                                                  font-size:2rem;
+                                                    font-weight:bold;
+                                                      margin-top:5px;
+                                                        color:#22c55e;
+                                                          min-height:30px;
+                                                          }
+
+                                                          /* BOTÕES */
+                                                          .botoes{
+                                                            display:grid;
+                                                              grid-template-columns:repeat(4,1fr);
+                                                                gap:10px;
+                                                                }
+
+                                                                button{
+                                                                  height:60px;
+                                                                    border:none;
+                                                                      border-radius:12px;
+                                                                        font-size:1.2rem;
+                                                                          cursor:pointer;
+                                                                            transition:0.15s;
+                                                                              background:#1f2937;
+                                                                                color:white;
+                                                                                }
+
+                                                                                button:hover{
+                                                                                  transform:scale(1.05);
+                                                                                    background:#374151;
+                                                                                    }
+
+                                                                                    .op{
+                                                                                      color:#60a5fa;
+                                                                                      }
+
+                                                                                      .clear{
+                                                                                        background:#ef4444;
+                                                                                        }
+
+                                                                                        .equal{
+                                                                                          background:#22c55e;
+                                                                                            grid-row:span 2;
+                                                                                            }
+
+                                                                                            .zero{
+                                                                                              grid-column:span 2;
+                                                                                              }
+                                                                                              </style>
+                                                                                              </head>
+
+                                                                                              <body>
+
+                                                                                              <div class="calculadora">
+
+                                                                                                <div class="display">
+                                                                                                    <div class="expr" id="expr">0</div>
+                                                                                                        <div class="result" id="result">= 0</div>
+                                                                                                          </div>
+
+                                                                                                            <div class="botoes">
+
+                                                                                                                <button class="clear" onclick="limpar()">C</button>
+                                                                                                                    <button onclick="ce()">CE</button>
+                                                                                                                        <button class="op" onclick="adicionar('/')">÷</button>
+                                                                                                                            <button class="op" onclick="adicionar('*')">×</button>
+
+                                                                                                                                <button onclick="adicionar('7')">7</button>
+                                                                                                                                    <button onclick="adicionar('8')">8</button>
+                                                                                                                                        <button onclick="adicionar('9')">9</button>
+                                                                                                                                            <button class="op" onclick="adicionar('-')">−</button>
+
+                                                                                                                                                <button onclick="adicionar('4')">4</button>
+                                                                                                                                                    <button onclick="adicionar('5')">5</button>
+                                                                                                                                                        <button onclick="adicionar('6')">6</button>
+                                                                                                                                                            <button class="op" onclick="adicionar('+')">+</button>
+
+                                                                                                                                                                <button onclick="adicionar('1')">1</button>
+                                                                                                                                                                    <button onclick="adicionar('2')">2</button>
+                                                                                                                                                                        <button onclick="adicionar('3')">3</button>
+                                                                                                                                                                            <button class="equal" onclick="calcular()">=</button>
+
+                                                                                                                                                                                <button class="zero" onclick="adicionar('0')">0</button>
+                                                                                                                                                                                    <button onclick="adicionar('.')">.</button>
+
+                                                                                                                                                                                      </div>
+                                                                                                                                                                                      </div>
+
+                                                                                                                                                                                      <script>
+
+                                                                                                                                                                                      let expressao = "";
+
+                                                                                                                                                                                      const expr = document.getElementById("expr");
+                                                                                                                                                                                      const result = document.getElementById("result");
+
+                                                                                                                                                                                      function atualizar(){
+                                                                                                                                                                                        expr.innerText = expressao || "0";
+                                                                                                                                                                                          preview();
+                                                                                                                                                                                          }
+
+                                                                                                                                                                                          /* RESULTADO EM TEMPO REAL */
+                                                                                                                                                                                          function preview(){
+                                                                                                                                                                                            try{
+                                                                                                                                                                                                if(expressao.trim() === ""){
+                                                                                                                                                                                                      result.innerText = "= 0";
+                                                                                                                                                                                                            return;
+                                                                                                                                                                                                                }
+                                                                                                                                                                                                                    result.innerText = "= " + eval(expressao);
+                                                                                                                                                                                                                      }catch{
+                                                                                                                                                                                                                          result.innerText = "= ...";
+                                                                                                                                                                                                                            }
+                                                                                                                                                                                                                            }
+
+                                                                                                                                                                                                                            function adicionar(v){
+                                                                                                                                                                                                                              expressao += v;
+                                                                                                                                                                                                                                atualizar();
+                                                                                                                                                                                                                                }
+
+                                                                                                                                                                                                                                function limpar(){
+                                                                                                                                                                                                                                  expressao = "";
+                                                                                                                                                                                                                                    atualizar();
+                                                                                                                                                                                                                                    }
+
+                                                                                                                                                                                                                                    /* CE = apaga último caractere (simples e funcional) */
+                                                                                                                                                                                                                                    function ce(){
+                                                                                                                                                                                                                                      expressao = expressao.slice(0, -1);
+                                                                                                                                                                                                                                        atualizar();
+                                                                                                                                                                                                                                        }
+
+                                                                                                                                                                                                                                        function calcular(){
+                                                                                                                                                                                                                                          try{
+                                                                                                                                                                                                                                              expressao = eval(expressao).toString();
+                                                                                                                                                                                                                                                  atualizar();
+                                                                                                                                                                                                                                                    }catch{
+                                                                                                                                                                                                                                                        result.innerText = "Erro";
+                                                                                                                                                                                                                                                            expressao = "";
+                                                                                                                                                                                                                                                                atualizar();
+                                                                                                                                                                                                                                                                  }
+                                                                                                                                                                                                                                                                  }
+
+                                                                                                                                                                                                                                                                  /* TECLADO */
+                                                                                                                                                                                                                                                                  document.addEventListener("keydown",(e)=>{
+
+                                                                                                                                                                                                                                                                    if(!isNaN(e.key) || ["+","-","*","/","."].includes(e.key)){
+                                                                                                                                                                                                                                                                        adicionar(e.key);
+                                                                                                                                                                                                                                                                          }
+
+                                                                                                                                                                                                                                                                            if(e.key === "Enter") calcular();
+                                                                                                                                                                                                                                                                              if(e.key === "Backspace") ce();
+                                                                                                                                                                                                                                                                              });
+
+                                                                                                                                                                                                                                                                              atualizar();
+
+                                                                                                                                                                                                                                                                              </script>
+
+                                                                                                                                                                                                                                                                              </body>
+                                                                                                                                                                                                                                                                              </html>
